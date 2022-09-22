@@ -1,6 +1,6 @@
 
 [install]
-npm init -y (create package.json)
+####npm init -y (create package.json)
 npx tsc --init (create tsconfig.json)
 npm i typescript --save-dev (install typescript)
 npm i ts-node-dev --save-dev (install ts-node-dev for development)
