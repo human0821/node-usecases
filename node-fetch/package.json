@@ -1,7 +1,7 @@
 {
-  "name": "GoogleWeatherServer",
+  "name": "node-fetch lib",
   "version": "1.0.0",
-  "description": "GoogleWeather node-server. Fetches Google weather page and responses with raw-data",
+  "description": "node-fetch lib",
   "type": "module",
   "main": "app.js",
   "scripts": {
