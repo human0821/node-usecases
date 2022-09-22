@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permissions</title>
+</head>
+<body>
+  <div>
+    <div>Add permission for user with uid</div>
+    <form data-method="POST" data-action="/permission" id="pform">
+      <input type="number" name="input" />
+      <button type="submit" name="submit">create permission</button>
+    </form>
+  </div>
+  <div>
+    <div>Remove permission for user with uid</div>
+    <form data-method="DELETE" data-action="/permission" id="dform">
+      <input type="number" name="input" />
+      <button type="submit" name="submit">remove permission</button>
+    </form>
+  </div>
+  <script type="text/javascript">
+    const pform = document.querySelector('#pform')
+    const dform = document.querySelector('#dform')
+    const formHandler = async event => {
+      event.preventDefault()
+      const form = event.currentTarget
+      const {action, method} = form.dataset
+      const {input, submit} = form.elements
+      const pform = form.id === 'pform'
+      const [empty, submitStateProcess, submitStateDone] = ['', pform ? 'creating...' : 'removing...', pform ? 'create permission' : 'remove permission']
+      const uid = input.value
+      submit.disabled = input.disabled = true
+      submit.innerText = submitStateProcess
+      try {
+        const response = await fetch(action, {
+          method: method.toUpperCase(),
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'omit',
+          body: JSON.stringify({uid})
+        })
+        if (response.ok) { //[200-299]
+          console.log(await response.json())
+        }
+        else {
+          console.error(await response.text())
+        }
+      }
+      catch (threw) {
+        console.error(threw)
+      }
+      finally {
+        input.value = empty
+        submit.disabled = input.disabled = false
+        submit.innerText = submitStateDone
+      }
+    }
+    pform.addEventListener('submit', formHandler)
+    dform.addEventListener('submit', formHandler)
+  </script>
+</body>
+</html>
