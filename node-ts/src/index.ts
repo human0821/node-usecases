@@ -1,4 +1,4 @@
-import decoratorsES7 from './decoratorsES7'; decoratorsES7
+import decoratorsES7 from './decoratorsES7'
 import * as process from 'process'
 import express from 'express'
 import bodyParser from 'body-parser'
