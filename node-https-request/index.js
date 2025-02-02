@@ -9,16 +9,13 @@ const stages = {
 }
 
 const fileFetcher = index => {
-
   const fileName = getFileName(index);
-
   const options = {
     hostname: 'content.foto.my.mail.ru',
     port: 443,
     path: `/community/this_is_russia/_groupsphoto/${fileName}.jpg`,
     method: 'GET'
   };
-  
   const req = https.request(options, res => {
     if (res.statusCode === 200) {
       console.log(stages.COPYING);
@@ -37,7 +34,6 @@ const fileFetcher = index => {
       fileFetcher(index + 1);
     }
   });
-  
   req.on('error', e => console.error(e));
   req.end();
 }
